@@ -4,7 +4,7 @@
     "description": "Base classes for data models based on ImmutableJS",
     "author": "mkrause",
     "license": "MIT",
-    "repository": "https://github.com/mkrause/lifecycle-immutable.js",
+    "repository": "https://github.com/mkrause/lifecycle-immutable",
     "es2015": "src/index.js",
     "main": "lib-cjs/index.js",
     "module": "lib-esm/index.js",
