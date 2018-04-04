@@ -12,8 +12,10 @@ describe('Entity', () => {
         it('should fail to construct a entity from empty arguments', () => {
             class User extends Entity<{ name : string }> {}
             
-            // $ExpectError
-            expect(() => { new User(); }).to.throw(TypeError);
+            new User();
+            
+            // // $ExpectError
+            // expect(() => { new User(); }).to.throw(TypeError);
         });
         
         it('should construct a entity from a plain object', () => {
@@ -21,6 +23,19 @@ describe('Entity', () => {
             
             expect(() => { new User({ name: 'John' }); }).to.not.throw();
             expect(new User({ name: 'John' }) instanceof User).to.be.true;
+        });
+        
+        it('should consider `undefined` properties to be valid properties (given that the type allows it)', () => {
+            class User extends Entity<{ name : string, optional: ?string }> {}
+            
+            // $ExpectError: missing property `optional`
+            new User({ name: 'John' });
+            
+            expect(() => { new User({ name: 'John', optional: undefined }); }).to.not.throw();
+            expect(new User({ name: 'John', optional: undefined }).has('optional')).to.be.true;
+            expect(new User({ name: 'John', optional: undefined }).get('optional')).to.equal(undefined);
+            
+            expect(() => { new User({ name: 'John', optional: 'foo' }); }).to.not.throw();
         });
         
         it('should enforce that all properties are present', () => {
