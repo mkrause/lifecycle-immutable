@@ -12,10 +12,8 @@ describe('Entity', () => {
         it('should fail to construct a entity from empty arguments', () => {
             class User extends Entity<{ name : string }> {}
             
-            new User();
-            
-            // // $ExpectError
-            // expect(() => { new User(); }).to.throw(TypeError);
+            // $ExpectError
+            expect(() => { new User(); }).to.throw(TypeError);
         });
         
         it('should construct a entity from a plain object', () => {
