@@ -1,6 +1,7 @@
 // @flow
 
 import Imm from 'immutable';
+import type { RecordFactory } from 'immutable';
 
 
 export type Status = {|
@@ -31,7 +32,9 @@ export default <T : { [string] : mixed }>(schema : T) => {
     
     const keys = Object.keys(schema);
     
-    class Entity extends Imm.Record(defaults) {
+    const Factory : RecordFactory<T> = Imm.Record(defaults);
+    
+    class Entity extends Factory {
         /*
         Override the internal `_keys` property, in order to hide `_status`. Note that `has()`
         and `get()` don't use `_keys`, they refer to `_indices` instead. This allows us to
