@@ -42,7 +42,7 @@ export default <T : { [string] : mixed }>(schema : T) => {
         get status() : Status {
             return this.get('_status');
         }
-    };
+    }
     
     return Entity;
 };
