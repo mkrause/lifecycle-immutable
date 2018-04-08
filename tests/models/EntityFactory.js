@@ -7,10 +7,10 @@ import chai, { assert, expect } from 'chai';
 import Imm from 'immutable';
 import type { RecordFactory, RecordOf } from 'immutable';
 
-import Entity from '../../src/models/Entity2.js';
+import Entity from '../../src/models/EntityFactory.js';
 
 
-describe('Entity2', () => {
+describe('EntityFactory', () => {
     // describe('temp', () => {
     //     it('should ...', () => {
     //         class User extends Entity({ name: String }) {}

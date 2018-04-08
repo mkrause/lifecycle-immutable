@@ -1,4 +1,4 @@
-// @flow
+// @xflow (disabled)
 
 import Imm from 'immutable';
 import type { RecordFactory } from 'immutable';
@@ -10,6 +10,17 @@ export type Status = {|
     +error : null | Error,
 |};
 
+/*
+An experimental alternative to `Entity`, which uses inheritance instead of composition.
+
+Benefits:
+  - No need to redefine all Immutable.Record methods.
+  - No need for hacks to get Immutable to accept the Entity as an Immutable data structure.
+  - Likely to be slightly more efficient due to less overhead (but we haven't tested this at all).
+
+Issues:
+  - Flow doesn't work well with inheritance. Generics are especially hard to get right here.
+*/
 export default <T : { [string] : mixed }>(schema : T) => {
     if (schema.hasOwnProperty('_status')) {
         throw new TypeError('Cannot use `_status` as property key');
