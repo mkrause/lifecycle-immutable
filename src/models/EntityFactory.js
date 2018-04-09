@@ -11,7 +11,8 @@ export type Status = {|
 |};
 
 /*
-An experimental alternative to `Entity`, which uses inheritance instead of composition.
+An experimental alternative to `Entity`, which uses a factory function that produces a subclass
+of `Immutable.Record` (rather than the composition approach used by `Entity`).
 
 Benefits:
   - No need to redefine all Immutable.Record methods.
@@ -19,7 +20,8 @@ Benefits:
   - Likely to be slightly more efficient due to less overhead (but we haven't tested this at all).
 
 Issues:
-  - Flow doesn't work well with inheritance. Generics are especially hard to get right here.
+  - Can't seem to express this in flow. Flow doesn't seem to be very fond of inheritance in general,
+    but the combination of dynamic class generation, generics, etc. are especially hard to get right.
 */
 export default <T : { [string] : mixed }>(schema : T) => {
     if (schema.hasOwnProperty('_status')) {
@@ -38,8 +40,6 @@ export default <T : { [string] : mixed }>(schema : T) => {
         (defaults, key) => ({ ...defaults, [key]: null }),
         internals
     );
-    
-    //const defaults : T & typeof internals = { ...schema, ...internals };
     
     const keys = Object.keys(schema);
     

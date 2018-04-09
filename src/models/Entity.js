@@ -91,4 +91,4 @@ export default class Entity<T : { +[string] : mixed }> {
     toString() : string {
         return this._instance.toString();
     }
-};
+}
