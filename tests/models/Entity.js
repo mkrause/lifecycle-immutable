@@ -9,22 +9,22 @@ import Entity from '../../src/models/Entity.js';
 
 describe('Entity', () => {
     describe('constructor', () => {
-        it('should fail to construct a entity from empty arguments', () => {
+        it('should fail to construct an entity from empty arguments', () => {
             class User extends Entity<{ name : string }> {}
             
             // $ExpectError
             expect(() => { new User(); }).to.throw(TypeError);
         });
         
-        it('should construct a entity from a plain object', () => {
+        it('should construct an entity from a plain object', () => {
             class User extends Entity<{ name : string }> {}
             
             expect(() => { new User({ name: 'John' }); }).to.not.throw();
-            expect(new User({ name: 'John' }) instanceof User).to.be.true;
+            expect(new User({ name: 'John' })).to.be.an.instanceof(User);
         });
         
         it('should consider `undefined` properties to be valid properties (given that the type allows it)', () => {
-            class User extends Entity<{ name : string, optional: ?string }> {}
+            class User extends Entity<{ name : string, optional : ?string }> {}
             
             // $ExpectError: missing property `optional`
             new User({ name: 'John' });
