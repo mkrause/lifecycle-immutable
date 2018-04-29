@@ -6,7 +6,7 @@ import Collection from './models/Collection.js';
 import Entity from './models/Entity.js';
 
 
-export default {
+export {
     Schema,
     Collection,
     Entity,

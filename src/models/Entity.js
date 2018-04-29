@@ -4,6 +4,8 @@ import _ from 'lodash';
 import * as Imm from 'immutable';
 import type { RecordOf } from 'immutable';
 
+import { status } from '@mkrause/lifecycle-loader';
+
 import Collection from './Collection.js';
 
 
@@ -38,6 +40,8 @@ export default class Entity<T : { +[string] : mixed }> {
         this._instance = RecordFactory(instance);
         
         Object.assign(this.meta, meta);
+        
+        //this[status] = { ready = false, loading = false, error = null };
         
         // Define getters for all properties (to allow using `entity.foo` instead of `entity.get('foo')`).
         // Note: flow doesn't allow us to add properties dynamically, so using this will cause flow errors.
